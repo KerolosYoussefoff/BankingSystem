@@ -1,22 +1,26 @@
 package accountmanagement.Repositry;
+import accountmanagement.services.Transactions;
 import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-//String.valueOf(((long) (9000000000000000L+Math.random()*1000000000000000L)))
 public class BankAccount {
     //    private parameters for encapsulation
     private String accountNumber ;
     private String accountHolderName;
     private double balance ;
-    private List<String> transactions;
+    private ArrayList<String> transactions =new ArrayList<>();
     final double fee =5 ;
+    Transactions accountTrans ;
+    //////////////////////////////////////////////////////////////////////////////////
     //    define a constructor
     public  BankAccount(String accountNumber, String accountHolderName, double initialBalance) {
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
         balance = initialBalance;
     }
+    //////////////////////////////////////////////////////////////////////////////////
     //    create setter & getter method
 
     public void setAccountNumber(String accountNumber) {
@@ -31,7 +35,7 @@ public class BankAccount {
         this.balance = balance;
     }
 
-    public void setTransactions(List<String> transactions) {
+    public void setTransactions(ArrayList<String> transactions) {
         this.transactions = transactions;
     }
 
@@ -50,20 +54,42 @@ public class BankAccount {
     public List<String> getTransactions() {
         return transactions;
     }
+    //////////////////////////////////////////////////////////////////////////////////
     // helper methods
+    // 1 A method to check if the entered data is not less than zero
     private boolean isLessThan(double amount){
         return amount<=0;
     }
-//    private boolean isContainsNums(String name) {
-//        return  name.contains("1,2,3,4,5,6,7,8,9,0");
-//    }
+    // 2 A method used to convert the balance into EGP
+    private String getCurrencyInEGP(double value){
+        NumberFormat currency =NumberFormat.getCurrencyInstance(new Locale("EN","EG"));
+        return currency.format(balance);
+    }
+    //////////////////////////////////////////////////////////////////////////////////
     // A method used to make a deposit
     public void makeDeposit (double amount){
+        double result = 0  ;
         if (isLessThan(amount)) {
             System.out.println("Failed to make the process.");
             throw new  IllegalArgumentException("The deposit amount must be positive.");
         }
-        balance += amount ;
+        else {
+            double initialBalance = balance; // Balance before deposit
+            double finalBalance = balance + amount ; // Balance after deposit
+
+            // Update balance
+            balance = finalBalance;
+
+            // Log the transaction
+            accountTrans = new Transactions(
+                    LocalDateTime.now(),
+                    getAccountNumber(),
+                    getAccountHolderName(),
+                    initialBalance, // Initial balance before transaction
+                    finalBalance,  // Final balance after transaction
+                    "Deposit");
+            transactions.add(accountTrans.toStringDeposit()); // Add the transaction details to the transaction list
+        }
     }
 
     // A method used to make a withdraw
@@ -72,15 +98,31 @@ public class BankAccount {
             System.out.println("Failed to make the process .");
             throw new  IllegalArgumentException("The with draw amount must be positive and balance is greater than withdraw amount.");
         }
-        else
-          balance -= (amount+fee) ;
-    }
-    // A method used to convert the balance into EGP
-    protected String getCurrencyInEGP(double value){
-        NumberFormat currency =NumberFormat.getCurrencyInstance(new Locale("EN","EG"));
-        return currency.format(balance);
-    }
+        else {
+            double initialBalance = balance; // Balance before withdrawal
+            double finalBalance = balance - (amount + fee); // Balance after withdrawal
 
+            // Update balance
+            balance = finalBalance;
+
+            // Log the transaction
+            accountTrans = new Transactions(
+                    LocalDateTime.now(),
+                    getAccountNumber(),
+                    getAccountHolderName(),
+                    initialBalance, // Initial balance before transaction
+                    finalBalance,  // Final balance after transaction
+                    "Withdraw"
+            );
+            transactions.add(accountTrans.toStringWithdraw()); // Add the transaction details to the transaction list
+        }
+
+    }
+    public void viewTransactionHistory(){
+        for (String transaction : transactions) {
+            System.out.println(transaction);
+        }
+    }
 
     @Override
     public String toString() {

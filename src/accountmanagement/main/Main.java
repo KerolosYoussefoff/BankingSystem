@@ -34,6 +34,9 @@ public class Main {
                 case 4 : // In this case we check the balance
                     System.out.println("Account balance is : " + user.getBalance());
                     break;
+                case 5 :  // In this case we show the transaction history
+                        user.viewTransactionHistory();
+                    break;
                 case 6 : //In this case  the user show his account details 
                     String details = user.toString();
                     System.out.println(details);
