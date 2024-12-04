@@ -12,7 +12,8 @@ public class menu {
         System.out.println("4) Cheek balance .");
         System.out.println("5) View transaction history .");
         System.out.println("6) View account details .");
-        System.out.println("7) Exit .");
+        System.out.println("7) Create a saving account .");
+        System.out.println("8) Exit .");
         System.out.print("Enter the number to select method :  ");
     }
 }

@@ -50,6 +50,9 @@ public class BankAccount {
     public String getBalance() {
         return getCurrencyInEGP(balance);
     }
+    public  double getbalance(){
+        return balance;
+    }
 
     public List<String> getTransactions() {
         return transactions;
@@ -71,7 +74,7 @@ public class BankAccount {
         double result = 0  ;
         if (isLessThan(amount)) {
             System.out.println("Failed to make the process.");
-            throw new  IllegalArgumentException("The deposit amount must be positive.");
+            throw new InvalidInputException("The deposit amount must be positive.");
         }
         else {
             double initialBalance = balance; // Balance before deposit
@@ -86,17 +89,17 @@ public class BankAccount {
                     getAccountNumber(),
                     getAccountHolderName(),
                     initialBalance, // Initial balance before transaction
+                    amount,         // The amount being deposited
                     finalBalance,  // Final balance after transaction
                     "Deposit");
             transactions.add(accountTrans.toStringDeposit()); // Add the transaction details to the transaction list
         }
     }
-
     // A method used to make a withdraw
     public void makeWithdraw(double amount ) {
         if (balance < amount || isLessThan(amount)){
             System.out.println("Failed to make the process .");
-            throw new  IllegalArgumentException("The with draw amount must be positive and balance is greater than withdraw amount.");
+            throw new InvalidInputException("The with draw amount must be positive and balance is greater than withdraw amount."+ getCurrencyInEGP(balance));
         }
         else {
             double initialBalance = balance; // Balance before withdrawal
@@ -111,17 +114,24 @@ public class BankAccount {
                     getAccountNumber(),
                     getAccountHolderName(),
                     initialBalance, // Initial balance before transaction
+                    amount,        // The amount that being withdrawn
                     finalBalance,  // Final balance after transaction
                     "Withdraw"
             );
             transactions.add(accountTrans.toStringWithdraw()); // Add the transaction details to the transaction list
         }
-
     }
     public void viewTransactionHistory(){
         for (String transaction : transactions) {
-            System.out.println(transaction);
+            System.out.println(transaction); //View the transaction history
         }
+    }
+    public StringBuilder SaveTransaction(){
+        StringBuilder transactionsss = new StringBuilder();
+        for (String transaction : transactions) {
+            transactionsss.append(transaction).append("\n");
+        }
+        return transactionsss ;
     }
 
     @Override

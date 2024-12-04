@@ -7,15 +7,17 @@ public class Transactions implements TransactionsInter {
     private String userID;
     private String userName;
     private double initialAmount; // Balance before the transaction
+    double withdrawOrDeposit ;   // Withdraw or deposit amount
     private double finalAmount;   // Balance after the transaction
     private String transactionType;
 
     // Constructor
-    public Transactions(LocalDateTime transactionDate, String userID, String userName, double initialAmount, double finalAmount, String transactionType) {
+    public Transactions(LocalDateTime transactionDate, String userID, String userName, double initialAmount ,double withdrawOrDeposit, double finalAmount, String transactionType) {
         this.transactionDate = transactionDate;
         this.userID = userID;
         this.userName = userName;
         this.initialAmount = initialAmount;
+        this.withdrawOrDeposit=withdrawOrDeposit;
         this.finalAmount = finalAmount;
         this.transactionType = transactionType;
     }
@@ -27,10 +29,11 @@ public class Transactions implements TransactionsInter {
                 "transactionDate=" + transactionDate +
                 ", userID='" + userID + '\'' +
                 ", userName='" + userName + '\'' +
-                ", Deposit=" + initialAmount +
-                ", Balance=" + finalAmount +
+                ", Initial Balance =" + initialAmount +
+                ", Deposit =" + withdrawOrDeposit +
+                ", Final Balance=" + finalAmount +
                 ", Transaction type='" + transactionType + '\'' +
-                '}';
+                '}' + "\n";
     }
     @Override
     public String toStringWithdraw() {
@@ -38,8 +41,9 @@ public class Transactions implements TransactionsInter {
                 "transactionDate=" + transactionDate +
                 ", userID='" + userID + '\'' +
                 ", userName='" + userName + '\'' +
-                ", Withdraw='" + initialAmount + '\'' +
-                ", balance='" + finalAmount + '\'' + '\''+ ", fee = '" + "5 "+ '\''+", Transaction type : " + transactionType + '\''+
-                '}';
+                ", Initial Balance='" + initialAmount + '\'' +
+                ", Withdraw =" + withdrawOrDeposit +
+                ", Final balance='" + finalAmount + '\'' + '\''+ ", fees = '" + "5 "+ '\''+", Transaction type : " + transactionType + '\''+
+                '}' + "\n";
     }
 }
