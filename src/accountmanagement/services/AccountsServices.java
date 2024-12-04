@@ -25,10 +25,11 @@ public class AccountsServices {
         }
         return new BankAccount(String.valueOf(accountNum),name,balance);
     }
-    public static SavingsAccount createSavingAccount(String accountNumber, String accountHolderName, double balance, double minimumBalance){
+
+    public static SavingsAccount createSavingAccount(String accountNumber, String accountHolderName, double balance, double minimumBalance, short noMonths) {
         if (balance >= minimumBalance) {
             System.out.println("Saving account created successfully");
-            return new SavingsAccount(accountNumber, accountHolderName, balance, minimumBalance);
+            return new SavingsAccount(accountNumber, accountHolderName, balance, minimumBalance, noMonths);
         } else {
             throw new InsufficientFundsException("Balance is less than the required minimum balance.");
         }

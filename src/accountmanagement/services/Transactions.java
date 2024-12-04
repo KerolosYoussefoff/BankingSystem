@@ -25,7 +25,7 @@ public class Transactions implements TransactionsInter {
     //    create setter & getter method
     @Override
     public String toStringDeposit() {
-        return "Transactions{" +
+        return "Transactions{" + "\n" +
                 "transactionDate=" + transactionDate +
                 ", userID='" + userID + '\'' +
                 ", userName='" + userName + '\'' +
@@ -37,7 +37,7 @@ public class Transactions implements TransactionsInter {
     }
     @Override
     public String toStringWithdraw() {
-        return "Transactions{" +
+        return "Transactions{" + "\n" +
                 "transactionDate=" + transactionDate +
                 ", userID='" + userID + '\'' +
                 ", userName='" + userName + '\'' +

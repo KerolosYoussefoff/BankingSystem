@@ -64,7 +64,7 @@ public class BankAccount {
         return amount<=0;
     }
     // 2 A method used to convert the balance into EGP
-    private String getCurrencyInEGP(double value){
+    public String getCurrencyInEGP(double value) {
         NumberFormat currency =NumberFormat.getCurrencyInstance(new Locale("EN","EG"));
         return currency.format(balance);
     }
@@ -95,7 +95,8 @@ public class BankAccount {
             transactions.add(accountTrans.toStringDeposit()); // Add the transaction details to the transaction list
         }
     }
-    // A method used to make a withdraw
+
+    // A method used to make a withdrawal
     public void makeWithdraw(double amount ) {
         if (balance < amount || isLessThan(amount)){
             System.out.println("Failed to make the process .");
