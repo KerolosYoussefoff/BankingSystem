@@ -47,11 +47,11 @@ public class Main {
                     System.out.println(details);
                     break;
                 case 7 : // Create saving account
-                    System.out.println("Please enter number of months :");
+                    System.out.print("Please enter number of months :");
                     short noMonths = scanner.nextShort();
                     user1 = AccountsServices.createSavingAccount(user.getAccountHolderName(), user.getAccountNumber(), user.getbalance(), 12000, noMonths);
                     double interest = user1.calcInterestPerMonth(user.getbalance(), (double) noMonths);
-                    System.out.println("The interest for balance is: " + user1.getCurrencyInEGP(interest) + " ,for balance :" + user.getCurrencyInEGP(user.getbalance()) + " ,in :" + noMonths + " month with 20% of interest");
+                    System.out.println("The interest for balance is: " + interest + " ,for balance :" + user.getCurrencyInEGP(user.getbalance()) + " ,in :" + noMonths + " month with 20% of interest");
                      break;
                 case 8 :
                     value = saveTransactionFile(user);

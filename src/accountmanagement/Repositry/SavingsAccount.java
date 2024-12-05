@@ -15,7 +15,7 @@ public class SavingsAccount extends BankAccount {
     }
 
     public double calcInterestPerMonth(double noMonths, double Balance) {
-        return noMonths * Balance * 0.2;
+        return (noMonths * Balance * 0.2);
     }
 
 }
