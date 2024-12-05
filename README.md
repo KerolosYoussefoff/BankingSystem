@@ -79,10 +79,9 @@ This project serves as an assignment to practice clean coding and proper design 
    ```bash
    javac src/*.java
 
-
-
-
-   Author
+Author
 Kerolos Youssef
 kerolosyoussefoff@gmail.com
+
+   
 
