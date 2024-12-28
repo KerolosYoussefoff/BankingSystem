@@ -3,16 +3,16 @@ import accountmanagement.services.Transactions;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 public class BankAccount {
     //    private parameters for encapsulation
-    private String accountNumber ;
-    private String accountHolderName;
+    private final String accountNumber;
+    private final String accountHolderName;
     private double balance ;
-    private ArrayList<String> transactions =new ArrayList<>();
+    private final ArrayList<String> transactions = new ArrayList<>();
     final double fee =5 ;
     Transactions accountTrans ;
+
     //////////////////////////////////////////////////////////////////////////////////
     //    define a constructor
     public  BankAccount(String accountNumber, String accountHolderName, double initialBalance) {
@@ -22,22 +22,6 @@ public class BankAccount {
     }
     //////////////////////////////////////////////////////////////////////////////////
     //    create setter & getter method
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public void setAccountHolderName(String accountHolderName) {
-        this.accountHolderName = accountHolderName;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public void setTransactions(ArrayList<String> transactions) {
-        this.transactions = transactions;
-    }
 
     public String getAccountNumber() {
         return accountNumber;
@@ -54,9 +38,6 @@ public class BankAccount {
         return balance;
     }
 
-    public List<String> getTransactions() {
-        return transactions;
-    }
     //////////////////////////////////////////////////////////////////////////////////
     // helper methods
     // 1 A method to check if the entered data is not less than zero
@@ -71,7 +52,6 @@ public class BankAccount {
     //////////////////////////////////////////////////////////////////////////////////
     // A method used to make a deposit
     public void makeDeposit (double amount){
-        double result = 0  ;
         if (isLessThan(amount)) {
             System.out.println("Failed to make the process.");
             throw new InvalidInputException("The deposit amount must be positive.");

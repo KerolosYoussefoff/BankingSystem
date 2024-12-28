@@ -3,13 +3,13 @@ import java.time.LocalDateTime;
 
 public class Transactions implements TransactionsInter {
     //    private parameters for encapsulation
-    private LocalDateTime transactionDate;
-    private String userID;
-    private String userName;
-    private double initialAmount; // Balance before the transaction
+    private final LocalDateTime transactionDate;
+    private final String userID;
+    private final String userName;
+    private final double initialAmount; // Balance before the transaction
     double withdrawOrDeposit ;   // Withdraw or deposit amount
-    private double finalAmount;   // Balance after the transaction
-    private String transactionType;
+    private final double finalAmount;   // Balance after the transaction
+    private final String transactionType;
 
     // Constructor
     public Transactions(LocalDateTime transactionDate, String userID, String userName, double initialAmount ,double withdrawOrDeposit, double finalAmount, String transactionType) {
